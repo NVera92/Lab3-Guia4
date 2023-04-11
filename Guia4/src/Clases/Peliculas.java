@@ -1,12 +1,12 @@
 package Clases;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Peliculas {
 
     private String titulo;
     private String genero;
-    private Date fechaLanzamiento;
+    private LocalDateTime fechaLanzamiento;
     private Integer duracion;
     private String clasificacion;
     private String paisOrigen;
@@ -14,7 +14,7 @@ public class Peliculas {
     private Integer copias;
 
 
-    public Peliculas(String titulo, String genero, Date fechaLanzamiento, Integer duracion, String clasificacion, String paisOrigen, String descripcion, Integer copias) {
+    public Peliculas(String titulo, String genero, LocalDateTime fechaLanzamiento, Integer duracion, String clasificacion, String paisOrigen, String descripcion, Integer copias) {
         this.titulo = titulo;
         this.genero = genero;
         this.fechaLanzamiento = fechaLanzamiento;
@@ -41,11 +41,11 @@ public class Peliculas {
         this.genero = genero;
     }
 
-    public Date getFechaLanzamiento() {
+    public LocalDateTime getFechaLanzamiento() {
         return fechaLanzamiento;
     }
 
-    public void setFechaLanzamiento(Date fechaLanzamiento) {
+    public void setFechaLanzamiento(LocalDateTime fechaLanzamiento) {
         this.fechaLanzamiento = fechaLanzamiento;
     }
 

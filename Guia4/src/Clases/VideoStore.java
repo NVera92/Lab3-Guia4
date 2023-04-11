@@ -1,42 +1,43 @@
 package Clases;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.Callable;
 
 public class VideoStore {
 
-    private static ArrayList<Peliculas> stockPeliculas = new ArrayList<>();
+    private ArrayList<Peliculas> peliculas;
+    private ArrayList<Clientes> clientes;
+    private ArrayList<Alquileres> alquileres;
 
-    public static ArrayList<Peliculas> obtenerPeliculas() {
-        return stockPeliculas;
+    public VideoStore() {
+        this.peliculas = new ArrayList<>();
+        this.clientes = new ArrayList<>();
+        this.alquileres = new ArrayList<>();
     }
 
-    public static void recorrerPeliculas(ArrayList<Peliculas> lista) {
-        for (Peliculas p : lista) {
+    /// CLIENTES
+    public void altaCliente(String nombre, String telefono, String email) {
+        this.clientes.add(new Clientes(nombre, telefono, email));
+    }
+
+
+    /// PELICULAS
+
+    public void altaPeliculas(String titulo, String genero, LocalDateTime fechaLanzamiento, Integer duracion, String clasificacion, String paisOrigen, String descripcion, Integer copias) {
+        this.peliculas.add(new Peliculas(titulo, genero, fechaLanzamiento, duracion, clasificacion, paisOrigen, descripcion, copias));
+    }
+
+    public void recorrerPeliculas() {
+        for (Peliculas p : this.peliculas) {
             System.out.println(p.toString());
         }
     }
 
-    /// CLIENTES
-    private static ArrayList<Clientes> listadoClientes = new ArrayList<>();
-
-    public static ArrayList<Clientes> obtenerClientes() {
-        return listadoClientes;
-    }
-
-    public static void recorrerClientes(ArrayList<Clientes> lista){
-        for(Clientes c : lista){
-            System.out.println(c.toString());
-        }
-
-    }
-
-    /// Consulta de Sotck
-
-    public static Boolean tituloDisponible(ArrayList<Peliculas> stock,String titulo){
+    public Boolean pDisponible(String titulo) {
         Boolean flag = false;
-        for(Peliculas p : stock){
-            if(p.getTitulo() == titulo && p.getCopias() >= 1){
+        for (Peliculas p : this.peliculas) {
+            if (p.getTitulo() == titulo && p.getCopias() >= 1) {
                 flag = true;
             }
         }
@@ -44,60 +45,27 @@ public class VideoStore {
         return flag;
     }
 
-
-    /// Disminucion de copias disponible
-
-    public static void disminucionCopia(ArrayList<Peliculas> lista,String titulo){
-        for(Peliculas p : lista){
-            if(p.getTitulo() == titulo){
-                p.setCopias(p.getCopias()-1);
-            }
+    public void tituloDisponible(String titulo) {
+        if (pDisponible(titulo)) {
+            System.out.println("El titulo esta disponible");
+        } else {
+            System.out.println("El titulo NO esta disponible");
         }
     }
+
 
     /// Aumento de copias disponible
-    public static void aumentoCopia(ArrayList<Peliculas> lista,String titulo){
-        for(Peliculas p : lista){
-            if(p.getTitulo() == titulo){
-                p.setCopias(p.getCopias()+1);
-            }
-        }
-    }
+
 
     /// Consulta de Cliente
-    public static Boolean clienteExiste(ArrayList<Clientes> lista,String nombre){
-        Boolean flag = false;
-        for(Clientes c : lista){
-            if(c.getNombre() == nombre){
-                flag = true;
+    public Clientes cExiste(String nombre) {
+        for (Clientes c : this.clientes) {
+            if (c.getNombre() == nombre) {
+                return c;
             }
         }
-        return flag;
-    }
-
-    private static ArrayList<Alquileres> comprobantesAlquiler = new ArrayList<>();
-
-    public static ArrayList<Alquileres> obtenerAlquileres(){
-        return comprobantesAlquiler;
-    }
-
-    public static Boolean alquilerCliente(ArrayList<Alquileres> lista, String cliente){
-        Boolean flag = false;
-        for(Alquileres a : lista){
-            if(a.getCliente() == cliente){
-                flag = true;
-            }
-        }
-        return flag;
-    }
-
-    public static void devolucionAlquiler(ArrayList<Alquileres> lista,String cliente){
-        if(alquilerCliente(lista,cliente)){
-            for(Alquileres a : lista){
-                if(a.getCliente() == cliente){
-                    System.out.println(a.toString());
-                }
-            }
-        }
+        return null;
     }
 }
+
+
