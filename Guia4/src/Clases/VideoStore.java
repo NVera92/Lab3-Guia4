@@ -17,8 +17,8 @@ public class VideoStore {
     }
 
     /// CLIENTES
-    public void altaCliente(String nombre, String telefono, String email) {
-        this.clientes.add(new Clientes(nombre, telefono, email));
+    public void altaCliente(String nombre, String telefono, String direccion) {
+        this.clientes.add(new Clientes(nombre, telefono, direccion));
     }
 
 
@@ -56,15 +56,37 @@ public class VideoStore {
 
     /// Aumento de copias disponible
 
-
-    /// Consulta de Cliente
-    public Clientes cExiste(String nombre) {
-        for (Clientes c : this.clientes) {
-            if (c.getNombre() == nombre) {
-                return c;
+    /// Disminucion de copias disponibles
+    public void disminucionCopia(String titulo){
+        for(Peliculas p : this.peliculas){
+            if(p.getTitulo() == titulo){
+                int pos = this.peliculas.indexOf(p);
+                this.peliculas.get(pos).setCopias(p.getCopias()-1);
             }
         }
-        return null;
+    }
+
+
+    /// Consulta de Cliente
+    public Boolean cExiste(String nombre) {
+        Boolean flag = false;
+        for (Clientes c : this.clientes) {
+            if (c.getNombre() == nombre) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    /// Alta alquiler
+    public void altaAlquiler(LocalDateTime fechaRetiro,LocalDateTime fechaDevolucion,String cliente,String pelicula){
+        this.alquileres.add(new Alquileres(fechaRetiro,fechaDevolucion,cliente,pelicula));
+    }
+
+    public void recorrerAlquileres(){
+        for(Alquileres a : this.alquileres){
+            System.out.println(a.toString());
+        }
     }
 }
 

@@ -5,24 +5,24 @@ import java.util.Date;
 
 public class Alquileres {
 
-    private Date fechaRetiro;
+    private LocalDateTime fechaRetiro;
     private LocalDateTime fechaDevolucion;
     private String cliente;
     private String tituloAlquilado;
 
 
-    public Alquileres(Date fechaRetiro, LocalDateTime fechaDevolucion, String cliente, String tituloAlquilado) {
+    public Alquileres(LocalDateTime fechaRetiro, LocalDateTime fechaDevolucion, String cliente, String tituloAlquilado) {
         this.fechaRetiro = fechaRetiro;
         this.fechaDevolucion = fechaDevolucion;
         this.cliente = cliente;
         this.tituloAlquilado = tituloAlquilado;
     }
 
-    public Date getFechaRetiro() {
+    public LocalDateTime getFechaRetiro() {
         return fechaRetiro;
     }
 
-    public void setFechaRetiro(Date fechaRetiro) {
+    public void setFechaRetiro(LocalDateTime fechaRetiro) {
         this.fechaRetiro = fechaRetiro;
     }
 
